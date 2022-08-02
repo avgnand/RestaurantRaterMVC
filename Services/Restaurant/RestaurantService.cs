@@ -37,9 +37,25 @@ namespace RestaurantRaterMVC.Services.Restaurant
                 return restaurants;
         }
 
-        public Task<RestaurantDetail> GetRestaurantById(int id)
+        public async Task<RestaurantDetail> GetRestaurantById(int id)
         {
             throw new NotImplementedException();
+            // RestaurantEntity restaurant = await _context.Restaurants
+            //     .Include(r => r.Ratings)
+            //     .FirstOrDefaultAsync(r => r.Id == id);
+            // if (restaurant is null) {
+            //     return null;
+            // }
+            // RestaurantDetail restaurantDetail = new RestaurantDetail()
+            // {
+            //     Id = restaurant.Id,
+            //     Name = restaurant.Name,
+            //     Location = restaurant.Location,
+            //     AverageFoodScore = restaurant.AverageFoodScore,
+            //     AverageCleanlinessScore = restaurant.AverageCleanlinessScore,
+            //     AverageAtmosphereScore = restaurant.AverageAtmosphereScore
+            // };
+            // return restaurantDetail;
         }
 
         public Task<bool> UpdateRestaurant(RestaurantEdit model)
