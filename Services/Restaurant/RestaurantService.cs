@@ -39,28 +39,33 @@ namespace RestaurantRaterMVC.Services.Restaurant
 
         public async Task<RestaurantDetail> GetRestaurantById(int id)
         {
-            throw new NotImplementedException();
-            // RestaurantEntity restaurant = await _context.Restaurants
-            //     .Include(r => r.Ratings)
-            //     .FirstOrDefaultAsync(r => r.Id == id);
-            // if (restaurant is null) {
-            //     return null;
-            // }
-            // RestaurantDetail restaurantDetail = new RestaurantDetail()
-            // {
-            //     Id = restaurant.Id,
-            //     Name = restaurant.Name,
-            //     Location = restaurant.Location,
-            //     AverageFoodScore = restaurant.AverageFoodScore,
-            //     AverageCleanlinessScore = restaurant.AverageCleanlinessScore,
-            //     AverageAtmosphereScore = restaurant.AverageAtmosphereScore
-            // };
-            // return restaurantDetail;
+            RestaurantEntity? restaurant = await _context.Restaurants
+                .Include(r => r.Ratings)
+                .FirstOrDefaultAsync(r => r.Id == id);
+            if (restaurant is null) {
+                return null;
+            }
+            RestaurantDetail restaurantDetail = new RestaurantDetail()
+            {
+                Id = restaurant.Id,
+                Name = restaurant.Name,
+                Location = restaurant.Location,
+                AverageFoodScore = restaurant.AverageFoodScore,
+                AverageCleanlinessScore = restaurant.AverageCleanlinessScore,
+                AverageAtmosphereScore = restaurant.AverageAtmosphereScore
+            };
+            return restaurantDetail;
         }
 
-        public Task<bool> UpdateRestaurant(RestaurantEdit model)
+        public async Task<bool> UpdateRestaurant(RestaurantEdit model)
         {
-            throw new NotImplementedException();
+            RestaurantEntity restaurant = await _context.Restaurants.FindAsync(model.Id);
+            if (restaurant is null) {
+                return false;
+            }
+            restaurant.Location = model.Location;
+            restaurant.Name = model.Name;
+            return await _context.SaveChangesAsync() == 1;
         }
 
         public Task<bool> DeleteRestaurant(int id)
