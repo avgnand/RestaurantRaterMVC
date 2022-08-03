@@ -1,9 +1,10 @@
 @model IEnumerable<RestaurantRaterMVC.Models.Rating.RatingListItem>
 @{
-    ViewData["Title"] = ViewBag.RestaurantName;
+    string name = Model.First().RestaurantName;
+    ViewData["Title"] = name;
 }
 
-<h2>Ratings for @ViewBag.RestaurantName</h2>
+<h2>Ratings for @name</h2>
 <a asp-action="Create">Rate this restaurant</a>
 <table class="table">
     <tr>
