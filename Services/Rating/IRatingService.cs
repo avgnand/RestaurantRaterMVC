@@ -1,5 +1,5 @@
 
-using RestaurantRaterMVC.Models;
+using RestaurantRaterMVC.Models.Rating;
 
 namespace RestaurantRaterMVC.Services.Rating
 {

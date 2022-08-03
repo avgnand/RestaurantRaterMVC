@@ -15,5 +15,10 @@ namespace RestaurantRaterMVC.Controllers
             var ratings = await _service.GetAllRatings();
             return View(ratings);
         }
+
+        public async Task<IActionResult> Restaurant(int id) {
+            var ratings = await _service.GetRatingsForRestaurant(id);
+            return View(ratings);
+        }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using RestaurantRaterMVC.Data;
 using RestaurantRaterMVC.Models;
+using RestaurantRaterMVC.Models.Rating;
 
 namespace RestaurantRaterMVC.Services.Rating
 {
@@ -32,9 +33,19 @@ namespace RestaurantRaterMVC.Services.Rating
             return await ratings.ToListAsync();
         }
 
-        public Task<List<RatingListItem>> GetRatingsForRestaurant(int id)
+        public async Task<List<RatingListItem>> GetRatingsForRestaurant(int id)
         {
-            throw new NotImplementedException();
+            var ratings = _context.Ratings
+                .Where(r => r.RestaurantId == id)
+                .Select(r => new RatingListItem()
+                {
+                    Id = r.Id,
+                    RestaurantName = r.Restaurant.Name,
+                    FoodScore = r.FoodScore,
+                    AtmosphereScore = r.AtmosphereScore,
+                    CleanlinessScore = r.CleanlinessScore
+                });
+            return await ratings.ToListAsync();
         }
 
         public Task<bool> RateRestaurant(RatingCreate model)
