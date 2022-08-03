@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using RestaurantRaterMVC.Data;
 using RestaurantRaterMVC.Services;
+using RestaurantRaterMVC.Services.Rating;
 using RestaurantRaterMVC.Services.Restaurant;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,7 @@ builder.Services.AddDbContext<AppDbContext>
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();
+builder.Services.AddScoped<IRatingService, RatingService>();
 
 var app = builder.Build();
 
