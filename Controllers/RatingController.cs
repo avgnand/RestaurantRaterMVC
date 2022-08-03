@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using RestaurantRaterMVC.Models.Rating;
 using RestaurantRaterMVC.Services.Restaurant;
 using RestaurantRaterMVC.Services.Rating;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace RestaurantRaterMVC.Controllers
 {
@@ -25,16 +26,31 @@ namespace RestaurantRaterMVC.Controllers
             return View(ratings);
         }
 
-        public async Task<IActionResult> RateRestaurant(int id) {
-            RatingCreate ratingCreate = new RatingCreate()
+        public async Task<IActionResult> Create() {
+            // RatingCreate ratingCreate = new RatingCreate()
+            // {
+            //     RestaurantId = id
+            // };
+            // return View(ratingCreate);
+            var restaurants = await _restaurantService.GetAllRestaurants();
+            var restaurantOptions = new List<SelectListItem>();
+            foreach (var r in restaurants)
             {
-                RestaurantId = id
-            };
-            return View(ratingCreate);
+                restaurantOptions.Add(
+                    new SelectListItem()
+                    {
+                        Text = r.Name,
+                        Value = r.Id.ToString()
+                    }
+                );
+            }
+            var model = new RatingCreate();
+            model.RestaurantOptions = restaurantOptions;
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> RateRestaurant(RatingCreate model) {
+        public async Task<IActionResult> Create(RatingCreate model) {
             if (!ModelState.IsValid) return View(ModelState);
             bool isRated = await _service.RateRestaurant(model);
             if (!isRated) {
