@@ -59,5 +59,18 @@ namespace RestaurantRaterMVC.Controllers
             if (!hasUpdated) return View(model);
             return RedirectToAction(nameof(Details), new { id = model.Id });
         }
+
+        public async Task<IActionResult> Delete(int id) {
+            RestaurantDetail restaurant = await _service.GetRestaurantById(id);
+            if (restaurant is null) return RedirectToAction(nameof(Index));
+            return View(restaurant);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, RestaurantDetail model) {
+            bool wasDeleted = await _service.DeleteRestaurant(model.Id);
+            await _service.DeleteRestaurant(model.Id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

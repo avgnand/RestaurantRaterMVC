@@ -16,10 +16,12 @@
             <div class="form-group">
                 @Html.DisplayNameFor(r => r.Name)
                 @Html.EditorFor(r => r.Name)
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(r => r.Location)
                 @Html.EditorFor(r => r.Location)
+                <span asp-validation-for="Location" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary">
@@ -30,3 +32,6 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
