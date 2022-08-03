@@ -17,7 +17,8 @@ namespace RestaurantRaterMVC.Data
 
         public virtual List<RatingEntity> Ratings { get; set; } = new List<RatingEntity>();
 
-        public double AverageFoodScore => Ratings.Select(r => r.FoodScore).Sum();
+        public double AverageFoodScore => Ratings.Count > 0 ?
+        Ratings.Select(r => r.FoodScore).Sum() / Ratings.Count : 0;
 
         public double AverageCleanlinessScore => Ratings.Count > 0 ?
         Ratings.Select(r => r.CleanlinessScore).Sum() / Ratings.Count : 0;
