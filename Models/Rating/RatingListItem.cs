@@ -1,7 +1,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace RestaurantRaterMVC.Models
+namespace RestaurantRaterMVC.Models.Rating
 {
     public class RatingListItem
     {
