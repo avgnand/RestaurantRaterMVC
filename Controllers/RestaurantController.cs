@@ -1,7 +1,6 @@
-using System.ComponentModel;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantRaterMVC.Models.Restaurant;
-using RestaurantRaterMVC.Services;
+using RestaurantRaterMVC.Services.Restaurant;
 
 namespace RestaurantRaterMVC.Controllers
 {

@@ -5,3 +5,39 @@
 
 <h2>Ratings for @ViewBag.RestaurantName</h2>
 <a asp-action="Create">Rate this restaurant</a>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RestaurantName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodScore)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CleanlinessScore)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AtmosphereScore)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RestaurantName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CleanlinessScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AtmosphereScore)
+            </td>
+        </tr>
+    }
+</table>
+<div>
+    @Html.ActionLink("Back to Index", "Index")
+</div>

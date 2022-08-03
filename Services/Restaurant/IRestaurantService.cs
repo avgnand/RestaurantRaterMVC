@@ -1,6 +1,6 @@
 using RestaurantRaterMVC.Models.Restaurant;
 
-namespace RestaurantRaterMVC.Services
+namespace RestaurantRaterMVC.Services.Restaurant
 {
     public interface IRestaurantService
     {
